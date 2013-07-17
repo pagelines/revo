@@ -1,0 +1,9 @@
+[submodule "sections/folio"]
+	path = sections/folio
+	url = git@github.com:pagelines/folio.git
+[submodule "sections/squared"]
+	path = sections/squared
+	url = git@github.com:pagelines/squared.git
+[submodule "sections/beefy"]
+	path = sections/beefy
+	url = git@github.com:pagelines/beefy.git

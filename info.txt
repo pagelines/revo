@@ -1,0 +1,43 @@
+== Description ==
+<h3>What is Revo?</h3>
+
+Revo is a PageLines DMS child theme. It comes with a bunch of custom sections that will make your site unique.
+
+Revo is designed to be flat and simple and will look awesome on any type of site.
+
+It comes with cool parallax effects and some custom styles that makes your customization easy.
+
+<strong>Included section:</strong>
+
+Beefy
+Folio
+Revo Contact
+Revo Header
+Revo Latest
+Squared
++25 PageLines DMS sections
+
+What are you waiting for? <strong>Click the buy button! :)</strong>
+
+<h3>Support</h3>
+
+Please do not leave a review as a support question, they are for reviews. I am not notified of these reviews, and I have no way to respond to you. Please <strong>do not email me for support</strong>, because you will not receive a reply. If you need assistance, click the link in the box below - this link leads you to the forums where you can get support. <strong>Thanks!</strong>
+
+== Changelog ==
+
+= 1.3 =
+* Ready for DMS.
+
+= 1.2 =
+* General bug fixing
+* Removed default discription for shortcode input.
+* Nesten LESS code
+* Changed class name - Had "PageLines" in it. Which is for PageLines products only.
+
+= 1.1 =
+* Added shortcode field
+* Styled County in the sidebar area - Thanks to Mike Zielonka!
+* Fixed translation domain - can now be translated!
+
+= 1.0 =
+* Initial Release

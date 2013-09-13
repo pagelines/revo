@@ -36,7 +36,10 @@
             border:none;
             &.usquare_square {
                 cursor:pointer;
-                filter: url(@{plChildRoot}/sections/squared/js/filters.svg#grayscale); /* Firefox 3.5+ */
+
+            }
+            &.usquare_filter {
+                filter: url(@{plPluginsRoot}/squared/sections/squared/js/filters.svg#grayscale); /* Firefox 3.5+ */
                 filter: gray; /* IE6-9 */
                 -webkit-filter: grayscale(1); /* Google Chrome & Safari 6+ */}
             }
@@ -98,7 +101,7 @@
             -webkit-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
             box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
             z-index:3;
-            behavior: url(@{plChildRoot}/sections/squared/js/PIE.htc);
+            behavior: url(@{plPluginsRoot}/squared/sections/squared/js/PIE.htc);
             zoom:1;
             img {
                 &.usquare_square {
@@ -128,7 +131,7 @@
             -moz-box-shadow:10px 10px 10px rgba(0, 0, 0, 0.4);
             -webkit-box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
             box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
-            behavior: url(@{plChildRoot}/sections/squared/js/PIE.htc);
+            behavior: url(@{plPluginsRoot}/squared/sections/squared/js/PIE.htc);
             .close {
                 position:absolute;
                 top:6px;

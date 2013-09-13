@@ -6,9 +6,9 @@
 	Demo: http://squared.ahansson.com
 	Description: Squared is an interactive grid system that supports up to 15 images or icons with your custom text. It is awesome!
 	Class Name: Squared
-	Workswith: main, templates
 	Cloning: true
 	v3: true
+	Filter: format
 */
 
 class Squared extends PageLinesSection {
@@ -64,98 +64,112 @@ class Squared extends PageLinesSection {
 				<div class="usquare_module_shade"></div>
 					<?php
 
-						$squares = ( $this->opt( 'squared_squares', $this->oset ) ) ? $this->opt( 'squared_squares', $this->oset ) : '1' ;
+						$squares = ( $this->opt( 'squared_squares' ) ) ? $this->opt( 'squared_squares' ) : '1' ;
+
+						if ( $this->opt( 'squared_position' ) == 'right' ) {
+							$array = array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30);
+						} elseif ( $this->opt( 'squared_position' ) == 'left' ){
+							$array = array('');
+						} elseif ( $this->opt( 'squared_position' ) == 'mixed_right' ){
+							$array = array(1,2,3,7,8,9,13,14,15,19,20,21,25,26,27);
+						}else {
+							$array = array(4,5,6,10,11,12,16,17,18,22,23,24,28,29,30);
+						}
 
 						$output = '';
 						for ( $i = 1; $i <= $squares; $i++ ) {
 
-							if ( $this->opt( 'squared_image_'.$i, $this->oset ) ) {
+							if ( $this->opt( 'squared_image_'.$i ) ) {
 
-								$the_background_color = ( $this->opt( 'squared_background_color_'.$i, $this->oset ) ) ? pl_hashify( $this->opt( 'squared_background_color_'.$i, $this->oset ) ) : '#444444' ;
+								$the_background_color = ( $this->opt( 'squared_background_color_'.$i ) ) ? pl_hashify( $this->opt( 'squared_background_color_'.$i ) ) : '#444444' ;
 
-								$the_img = $this->opt( 'squared_image_'.$i, $this->oset );
+								$the_img = $this->opt( 'squared_image_'.$i );
 
-								$the_head_color = ( $this->opt( 'squared_head_color_'.$i, $this->oset ) ) ? pl_hashify( $this->opt( 'squared_head_color_'.$i, $this->oset ) ) : '#ffffff' ;
+								$the_head_color = ( $this->opt( 'squared_head_color_'.$i ) ) ? pl_hashify( $this->opt( 'squared_head_color_'.$i ) ) : '#ffffff' ;
 
-								$the_subhead_color = ( $this->opt( 'squared_subhead_color_'.$i, $this->oset ) ) ? pl_hashify( $this->opt( 'squared_subhead_color_'.$i, $this->oset ) ) : '#ffffff' ;
+								$the_subhead_color = ( $this->opt( 'squared_subhead_color_'.$i ) ) ? pl_hashify( $this->opt( 'squared_subhead_color_'.$i ) ) : '#ffffff' ;
 
-								$the_about_head_color = ( $this->opt( 'squared_about_head_color_'.$i, $this->oset ) ) ? pl_hashify( $this->opt( 'squared_about_head_color_'.$i, $this->oset ) ): '#000' ;
+								$the_about_head_color = ( $this->opt( 'squared_about_head_color_'.$i ) ) ? pl_hashify( $this->opt( 'squared_about_head_color_'.$i ) ): '#000' ;
 
-								$the_about_head = ( $this->opt( 'squared_about_head_'.$i, $this->tset ) ) ? sprintf( '<span data-sync="squared_about_head_%s" class="bold" style="color:%s;">%s</span>', $i, $the_about_head_color, $this->opt( 'squared_about_head_'.$i, $this->tset) ) :'' ;
+								$the_about_head = ( $this->opt( 'squared_about_head_'.$i ) ) ? sprintf( '<span data-sync="squared_about_head_%s" class="bold" style="color:%s;">%s</span>', $i, $the_about_head_color, $this->opt( 'squared_about_head_'.$i) ) :'' ;
 
-								$the_about_body_color = ( $this->opt( 'squared_about_body_color_'.$i, $this->oset ) ) ? pl_hashify( $this->opt( 'squared_about_body_color_'.$i, $this->oset ) ) : '#000' ;
+								$the_about_body_color = ( $this->opt( 'squared_about_body_color_'.$i ) ) ? pl_hashify( $this->opt( 'squared_about_body_color_'.$i ) ) : '#000' ;
 
-								$the_about_body = ( $this->opt( 'squared_about_body_'.$i, $this->tset ) ) ? sprintf( '<div data-sync="squared_about_body_%s" class="usquare_about" style="color:%s;">%s</div>', $i, $the_about_body_color, $this->opt( 'squared_about_body_'.$i, $this->tset) ) :'' ;
+								$the_about_body = ( $this->opt( 'squared_about_body_'.$i ) ) ? sprintf( '<div data-sync="squared_about_body_%s" class="usquare_about" style="color:%s;">%s</div>', $i, $the_about_body_color, $this->opt( 'squared_about_body_'.$i) ) :'' ;
 
-								$img = ( $the_img ) ? sprintf( '<img data-sync="squared_image_%s" src="%s" class="usquare_square" alt="" />', $i, $the_img) : '' ;
+								$filter = ( !$this->opt( 'squared_filter'.$i ) ) ? 'usquare_filter' : '' ;
 
-								$icons_count = ( $this->opt( 'squared_about_icons_'.$i, $this->oset ) ) ? $this->opt( 'squared_about_icons_'.$i, $this->oset ) : 1 ;
+								$img = ( $the_img ) ? sprintf( '<img data-sync="squared_image_%s" src="%s" class="usquare_square %s" />', $i, $the_img, $filter) : '' ;
 
-								$link = ( $this->opt( 'squared_link_'.$i, $this->tset ) ) ? $this->opt( 'squared_link_'.$i, $this->tset ) : '' ;
+								$icons_count = ( $this->opt( 'squared_about_icons_'.$i ) ) ? $this->opt( 'squared_about_icons_'.$i ) : 1 ;
 
-								if ( $this->opt( 'squared_icons_'.$i.'1', $this->oset ) ) {
-									$icons1 = sprintf('<li><a href="%s" target="_blank"><i class="icon-%s"></i></a></li>', $this->opt('squared_icons_link_'.$i.'1', $this->oset ), $this->opt('squared_icons_'.$i.'1', $this->oset ) );
+								$link = ( $this->opt( 'squared_link_'.$i ) ) ? $this->opt( 'squared_link_'.$i ) : '' ;
+
+								if ( $this->opt( 'squared_icons_'.$i.'1' ) ) {
+									$icons1 = sprintf('<li><a href="%s" target="_blank"><i class="icon-%s"></i></a></li>', $this->opt('squared_icons_link_'.$i.'1' ), $this->opt('squared_icons_'.$i.'1' ) );
 								} else {
 									$icons1 ='';
 								}
-								if ( $this->opt( 'squared_icons_'.$i.'2', $this->oset ) ) {
-									$icons2 = sprintf('<li><a href="%s" target="_blank"><i class="icon-%s"></i></a></li>', $this->opt('squared_icons_link_'.$i.'2', $this->oset ), $this->opt('squared_icons_'.$i.'2', $this->oset ) );
+								if ( $this->opt( 'squared_icons_'.$i.'2' ) ) {
+									$icons2 = sprintf('<li><a href="%s" target="_blank"><i class="icon-%s"></i></a></li>', $this->opt('squared_icons_link_'.$i.'2' ), $this->opt('squared_icons_'.$i.'2' ) );
 								} else {
 									$icons2 ='';
 								}
-								if ( $this->opt( 'squared_icons_'.$i.'3', $this->oset ) ) {
-									$icons3 = sprintf('<li><a href="%s" target="_blank"><i class="icon-%s"></i></a></li>', $this->opt('squared_icons_link_'.$i.'3', $this->oset ), $this->opt('squared_icons_'.$i.'3', $this->oset ) );
+								if ( $this->opt( 'squared_icons_'.$i.'3' ) ) {
+									$icons3 = sprintf('<li><a href="%s" target="_blank"><i class="icon-%s"></i></a></li>', $this->opt('squared_icons_link_'.$i.'3' ), $this->opt('squared_icons_'.$i.'3' ) );
 								} else {
 									$icons3 ='';
 								}
-								if ( $this->opt( 'squared_icons_'.$i.'4', $this->oset ) ) {
-									$icons4 = sprintf('<li><a href="%s" target="_blank"><i class="icon-%s"></i></a></li>', $this->opt('squared_icons_link_'.$i.'4', $this->oset ), $this->opt('squared_icons_'.$i.'4', $this->oset ) );
+								if ( $this->opt( 'squared_icons_'.$i.'4' ) ) {
+									$icons4 = sprintf('<li><a href="%s" target="_blank"><i class="icon-%s"></i></a></li>', $this->opt('squared_icons_link_'.$i.'4' ), $this->opt('squared_icons_'.$i.'4' ) );
 								} else {
 									$icons4 ='';
 								}
-								if ( $this->opt( 'squared_icons_'.$i.'5', $this->oset ) ) {
-									$icons5 = sprintf('<li><a href="%s" target="_blank"><i class="icon-%s"></i></a></li>', $this->opt('squared_icons_link_'.$i.'5', $this->oset ), $this->opt('squared_icons_'.$i.'5', $this->oset ) );
+								if ( $this->opt( 'squared_icons_'.$i.'5' ) ) {
+									$icons5 = sprintf('<li><a href="%s" target="_blank"><i class="icon-%s"></i></a></li>', $this->opt('squared_icons_link_'.$i.'5' ), $this->opt('squared_icons_'.$i.'5' ) );
 								} else {
 									$icons5 ='';
 								}
-								if ( $this->opt( 'squared_icons_'.$i.'5', $this->oset ) ) {
-									$icons5 = sprintf('<li><a href="%s" target="_blank"><i class="icon-%s"></i></a></li>', $this->opt('squared_icons_link_'.$i.'5', $this->oset ), $this->opt('squared_icons_'.$i.'5', $this->oset ) );
+								if ( $this->opt( 'squared_icons_'.$i.'5' ) ) {
+									$icons5 = sprintf('<li><a href="%s" target="_blank"><i class="icon-%s"></i></a></li>', $this->opt('squared_icons_link_'.$i.'5' ), $this->opt('squared_icons_'.$i.'5' ) );
 								} else {
 									$icons5 ='';
 								}
-								if ( $this->opt( 'squared_icons_'.$i.'6', $this->oset ) ) {
-									$icons6 = sprintf('<li><a href="%s" target="_blank"><i class="icon-%s"></i></a></li>', $this->opt('squared_icons_link_'.$i.'6', $this->oset ), $this->opt('squared_icons_'.$i.'6', $this->oset ) );
+								if ( $this->opt( 'squared_icons_'.$i.'6' ) ) {
+									$icons6 = sprintf('<li><a href="%s" target="_blank"><i class="icon-%s"></i></a></li>', $this->opt('squared_icons_link_'.$i.'6' ), $this->opt('squared_icons_'.$i.'6' ) );
 								} else {
 									$icons6 ='';
 								}
-								if ( $this->opt( 'squared_icons_'.$i.'7', $this->oset ) ) {
-									$icons7 = sprintf('<li><a href="%s" target="_blank"><i class="icon-%s"></i></a></li>', $this->opt('squared_icons_link_'.$i.'7', $this->oset ), $this->opt('squared_icons_'.$i.'7', $this->oset ) );
+								if ( $this->opt( 'squared_icons_'.$i.'7' ) ) {
+									$icons7 = sprintf('<li><a href="%s" target="_blank"><i class="icon-%s"></i></a></li>', $this->opt('squared_icons_link_'.$i.'7' ), $this->opt('squared_icons_'.$i.'7' ) );
 								} else {
 									$icons7 ='';
 								}
-								if ( $this->opt( 'squared_icons_'.$i.'8', $this->oset ) ) {
-									$icons8 = sprintf('<li><a href="%s" target="_blank"><i class="icon-%s"></i></a></li>', $this->opt('squared_icons_link_'.$i.'8', $this->oset ), $this->opt('squared_icons_'.$i.'8', $this->oset ) );
+								if ( $this->opt( 'squared_icons_'.$i.'8' ) ) {
+									$icons8 = sprintf('<li><a href="%s" target="_blank"><i class="icon-%s"></i></a></li>', $this->opt('squared_icons_link_'.$i.'8' ), $this->opt('squared_icons_'.$i.'8' ) );
 								} else {
 									$icons8 ='';
 								}
 
-								if ($i > 3 && $i < 7 || $i > 9 && $i < 13 ) {
-									$the_head = ( $this->opt( 'squared_head_'.$i, $this->tset ) ) ? sprintf( '<h3 data-sync="squared_head_%s" class="usquare_r" style="color:%s;">%s</h3>', $i, $the_head_color, $this->opt( 'squared_head_'.$i, $this->tset ) ) : '' ;
+								if ( in_array( $i, $array, true ) ) {
 
-									$the_subhead = ( $this->opt( 'squared_subhead_'.$i, $this->tset ) ) ? sprintf( '<span data-sync="squared_subhead_%s" class="usquare_r" style="color:%s;">%s</span>', $i, $the_subhead_color, $this->opt( 'squared_subhead_'.$i, $this->tset ) ) : '' ;
+									$the_head = ( $this->opt( 'squared_head_'.$i ) ) ? sprintf( '<h3 data-sync="squared_head_%s" class="usquare_r" style="color:%s;">%s</h3>', $i, $the_head_color, $this->opt( 'squared_head_'.$i ) ) : '' ;
 
-									$arrow = sprintf('<img src="%s" class="usquare_arrow usquare_arrow_r" alt="arrow" />', $this->base_url.'/img/arrow_r.png');
+									$the_subhead = ( $this->opt( 'squared_subhead_'.$i ) ) ? sprintf( '<span data-sync="squared_subhead_%s" class="usquare_r" style="color:%s;">%s</span>', $i, $the_subhead_color, $this->opt( 'squared_subhead_'.$i ) ) : '' ;
+
+									$arrow = ( !$this->opt( 'squared_arrow_'.$i ) ) ? sprintf('<img src="%s" class="usquare_arrow usquare_arrow_r" alt="arrow" />', $this->base_url.'/img/arrow_r.png') : '' ;
 
 									$close = sprintf('<a href="#" class="close close_left_side"><i class="icon-remove"></i></a>');
 
 									$img_position = sprintf('<div class="usquare_square usquare_square_bg%s"><div class="usquare_square_text_wrapper usquare_square_right">%s<div class="row"></div>%s%s<div class="row"></div></div></div>%s', $i, $arrow, $the_head, $the_subhead, $img );
 
 								} else {
-									$the_head = ( $this->opt( 'squared_head_'.$i, $this->tset ) ) ? sprintf( '<h3 data-sync="squared_head_%s" style="color:%s;">%s</h3>', $i, $the_head_color, $this->opt( 'squared_head_'.$i, $this->tset ) ) : '' ;
 
-									$the_subhead = ( $this->opt( 'squared_subhead_'.$i, $this->tset ) ) ? sprintf( '<span data-sync="squared_subhead_%s" style="color:%s;">%s</span>', $i, $the_subhead_color, $this->opt( 'squared_subhead_'.$i, $this->tset ) ) : '' ;
+									$the_head = ( $this->opt( 'squared_head_'.$i ) ) ? sprintf( '<h3 data-sync="squared_head_%s" style="color:%s;">%s</h3>', $i, $the_head_color, $this->opt( 'squared_head_'.$i ) ) : '' ;
 
-									$arrow = sprintf('<img src="%s" class="usquare_arrow" alt="arrow" />', $this->base_url.'/img/arrow.png');
+									$the_subhead = ( $this->opt( 'squared_subhead_'.$i ) ) ? sprintf( '<span data-sync="squared_subhead_%s" style="color:%s;">%s</span>', $i, $the_subhead_color, $this->opt( 'squared_subhead_'.$i ) ) : '' ;
+
+									$arrow = ( !$this->opt( 'squared_arrow_'.$i ) ) ? sprintf('<img src="%s" class="usquare_arrow" alt="arrow" />', $this->base_url.'/img/arrow.png') : '' ;
 
 									$close = sprintf('<a href="#" class="close"><i class="icon-remove"></i></a>');
 
@@ -208,10 +222,22 @@ class Squared extends PageLinesSection {
 		            'count_start'   => 1,               // Starting Count Number
 		            'count_number'  => 30,             // Ending Count Number
 		        ),
+		        array(
+		            'key'           => 'squared_position',
+		            'type'          => 'select',
+		            'label'			=> __( 'Position of icon', 'squared' ),
+		            'default'		=> 'mixed',
+		            'opts'			=> array(
+		            	'left'			=> array( 'name' => __( 'Icon on left', 'squared' ) ),
+		            	'right'			=> array( 'name' => __( 'Icon on right', 'squared' ) ),
+		            	'mixed_left'	=> array( 'name' => __( 'Icon mixed for each row, left start', 'squared' ) ),
+		            	'mixed_right'	=> array( 'name' => __( 'Icon mixed for each row, right start', 'squared' ) ),
+		            ),
+		        ),
 		    )
 		);
 
-		$squares = ( $this->opt( 'squared_squares', $this->oset ) ) ? $this->opt( 'squared_squares', $this->oset ) : '1' ;
+		$squares = ( $this->opt( 'squared_squares' ) ) ? $this->opt( 'squared_squares' ) : 1 ;
 
 		for ( $i = 1; $i <= $squares; $i++ ) {
 
@@ -226,6 +252,18 @@ class Squared extends PageLinesSection {
 						'label'  => __( 'Squared Image', 'Squared' ),
 						'type'   => 'image_upload',
 						'help'   => __( 'Upload an image... </br>Recommended image size: 160x160</br>Images will scale to match the size of the square, not crop.', 'Squared' ),
+					),
+
+					array(
+					 	'key' =>	'squared_arrow_'.$i,
+						'label'  => __( 'Hide arrow?', 'Squared' ),
+						'type'   => 'check',
+					),
+
+					array(
+					 	'key' =>	'squared_filter'.$i,
+						'label'  => __( 'Remove grayscale filter?', 'Squared' ),
+						'type'   => 'check',
 					),
 
 					array(
@@ -376,8 +414,8 @@ class Squared extends PageLinesSection {
 						'type'   => 'select_icon',
 					),
 					array(
-						'key' => 'squared_icons_link_'.$i.'7',
-                        'label' => __( sprintf('Icon link %s: <br/>Example: "http://facebook.com".', '7'), 'Squared' ),
+						'key' => 'squared_icons_link_'.$i.'8',
+                        'label' => __( sprintf('Icon link %s: <br/>Example: "http://facebook.com".', '8'), 'Squared' ),
                         'type'   => 'text',
                     ),
 				),
